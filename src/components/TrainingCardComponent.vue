@@ -1,5 +1,5 @@
 <template>
-  <div class="gamemenu-content-training-cards">
+  <div @click="navigateToTrainingView" class="gamemenu-content-training-cards">
     <div class="gamemenu-content-training-cards-img">
       <img
         :src="coverUrl"
@@ -20,6 +20,11 @@
 export default {
   name: "TrainingCard",
   props: ["coverUrl", "name"],
+    methods: {
+    navigateToTrainingView() {
+      this.$router.push({ name: "training" });
+    },
+  },
 };
 </script>
 

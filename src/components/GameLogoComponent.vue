@@ -1,5 +1,5 @@
 <template>
-  <div class="home-img">
+  <div @click="navigateToGameMenuView" class="home-img">
     <img :src="coverUrl" :alt="name" />
   </div>
 </template>
@@ -9,6 +9,11 @@ export default {
   name: "GameLogo",
 
   props: ["coverUrl", "name"],
+  methods: {
+    navigateToGameMenuView() {
+      this.$router.push({ name: "game" });
+    },
+  },
 };
 </script>
 
