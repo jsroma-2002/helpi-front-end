@@ -2,11 +2,11 @@
   <div class="gamemenu-content-training-cards">
     <div class="gamemenu-content-training-cards-img">
       <img
-        src="https://i.ytimg.com/vi/1x4y9bLH0hs/maxresdefault.jpg"
-        alt="Apex training"
+        :src="coverUrl"
+        :alt="name"
       />
     </div>
-    <h1>01</h1>
+    <h1>{{name}}</h1>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero dicta
       culpa sapiente qui voluptates doloremque nulla quas adipisci quis! Ut
@@ -19,6 +19,7 @@
 <script>
 export default {
   name: "TrainingCard",
+  props: ["coverUrl", "name"],
 };
 </script>
 
@@ -26,6 +27,7 @@ export default {
 .gamemenu-content-training-cards {
   position: relative;
   height: 400px;
+  cursor: pointer;
 
   box-shadow: -1px 10px 18px 5px rgba(0, 0, 0, 0.19);
   -webkit-box-shadow: -1px 10px 18px 5px rgba(0, 0, 0, 0.19);

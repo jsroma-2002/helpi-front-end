@@ -10,12 +10,8 @@
           placeat corrupti exercitationem? Quibusdam, reprehenderit.
         </p>
         <div class="gamemenu-info-group">
-          <a href="#" class="gamemenu-info-btn"
-            >Find Coach</a
-          >
-          <a href="#" class="gamemenu-info-btn"
-            >Find Training Material</a
-          >
+          <a href="#" class="gamemenu-info-btn">Find Coach</a>
+          <a href="#" class="gamemenu-info-btn">Find Training Material</a>
         </div>
       </div>
       <GameLogo
@@ -26,10 +22,22 @@
     <h2 class="gamemenu-training-cards-title">Prominent Training Material</h2>
     <div class="gamemenu-content-training">
       <div class="gamemenu-content-training-section">
-        <TrainingCard></TrainingCard>
-        <TrainingCard></TrainingCard>
-        <TrainingCard></TrainingCard>
-        <TrainingCard></TrainingCard>
+        <TrainingCard
+          coverUrl="https://i.ytimg.com/vi/1x4y9bLH0hs/maxresdefault.jpg"
+          name="10 Tips Apex"
+        ></TrainingCard>
+        <TrainingCard
+          coverUrl="https://i.ytimg.com/vi/UEwTnirimf0/maxresdefault.jpg"
+          name="Tutorial Apex Legends"
+        ></TrainingCard>
+        <TrainingCard
+          coverUrl="https://i.blogs.es/af52a9/apexguia/1366_2000.jpg"
+          name="Aprendiendo Apex"
+        ></TrainingCard>
+        <TrainingCard
+          coverUrl="https://i.ytimg.com/vi/K51APSqxLAk/maxresdefault.jpg"
+          name="Guia Heroes Apex"
+        ></TrainingCard>
       </div>
     </div>
   </section>
@@ -126,7 +134,7 @@ export default {
 }
 
 .gamemenu-content-training {
-margin: 60px 100px;
+  margin: 60px 100px;
   display: flex;
   justify-content: center;
   align-items: center;
