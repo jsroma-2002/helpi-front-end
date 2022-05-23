@@ -1,10 +1,10 @@
 <template>
   <section class="login-section">
-    <form @submit.prevent="login" class="login-form">
-      <h2 class="login-form-title">Log in</h2>
+    <form @submit.prevent="register" class="login-form">
+      <h2 class="login-form-title">Register</h2>
       <p class="login-form-paragraph">
-        Don't have an Account?
-        <a @click="navigateToRegisterView" href="#" class="login-form-link">Enter here</a>
+        Already have an Account?
+        <a @click="navigateToLoginView" href="#" class="login-form-link">Enter here</a>
       </p>
       <div class="login-form-container">
 
@@ -22,6 +22,18 @@
 
         <div class="login-form-group">
           <input
+            v-model="email"
+            type="email"
+            id="email"
+            class="login-form-input"
+            placeholder=" "
+          />
+          <label for="email" class="login-form-label">Email:</label>
+          <span class="login-form-line"></span>
+        </div>
+
+        <div class="login-form-group">
+          <input
             v-model="password"
             type="password"
             id="password"
@@ -31,6 +43,19 @@
           <label for="password" class="login-form-label">Password:</label>
           <span class="login-form-line"></span>
         </div>
+
+        <div class="login-form-group">
+          <input
+            v-model="birthDate"
+            type="date"
+            id="birthdate"
+            class="login-form-input"
+            placeholder=" "
+          />
+          <label for="birthdate" class="login-form-label">Birthdate:</label>
+          <span class="login-form-line"></span>
+        </div>
+
         <input type="submit" class="login-form-submit" value="Enter" />
       </div>
     </form>
@@ -39,16 +64,18 @@
 
 <script>
 export default {
-  name: "LoginForm",
+  name: "RegisterForm",
   methods:{
-    login(){
+    register(){
       var user = this.userName
+      var email = this.email
       var password = this.password
+      var birthDate = this.birthDate
 
-      console.log(user, password)
+      console.log(user, email, password, birthDate)
     },
-    navigateToRegisterView(){
-      this.$router.push({name: "register"})
+    navigateToLoginView(){
+      this.$router.push({name: "login"})
     }
   }
 

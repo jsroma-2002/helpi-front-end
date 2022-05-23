@@ -9,7 +9,7 @@
           cupiditate mollitia, dolorum doloribus incidunt officia voluptatum
           placeat corrupti exercitationem? Quibusdam, reprehenderit.
         </p>
-        <a href="#" class="home-info-btn">Register Now</a>
+        <a @click="navigateToRegisterView" href="#" class="home-info-btn">Register Now</a>
       </div>
       <GameLogo
         coverUrl="https://github.com/Complexity-Gaming/Help-I-Landing-Page/blob/main/img/Apex.png?raw=true"
@@ -40,6 +40,12 @@ export default {
   components: {
     GameLogo,
   },
+  methods:{
+    navigateToRegisterView(){
+      this.$router.push({name: "register"})
+    }
+  }
+
 };
 </script>
 
