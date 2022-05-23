@@ -2,42 +2,31 @@
   <section class="gamemenu-section">
     <div class="gamemenu-content">
       <div class="gamemenu-info">
-        <h2>Welcome to Apex Legends<br /><span>Game Menu</span></h2>
+        <h2>Welcome to {{ game.name }}<br /><span>Game Menu</span></h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore dicta,
-          eveniet in odio beatae dignissimos temporibus voluptatem modi,
-          cupiditate mollitia, dolorum doloribus incidunt officia voluptatum
-          placeat corrupti exercitationem? Quibusdam, reprehenderit.
+          {{ game.description }}
         </p>
         <div class="gamemenu-info-group">
           <a href="#" class="gamemenu-info-btn">Find Coach</a>
           <a href="#" class="gamemenu-info-btn">Find Training Material</a>
         </div>
       </div>
-      <GameLogo
-        coverUrl="https://github.com/Complexity-Gaming/Help-I-Landing-Page/blob/main/img/Apex.png?raw=true"
-        name="Apex Legends"
-      ></GameLogo>
+      <GameLogo :coverUrl="game.coverUri" :name="game.name"></GameLogo>
     </div>
     <h2 class="gamemenu-training-cards-title">Prominent Training Material</h2>
     <div class="gamemenu-content-training">
       <div class="gamemenu-content-training-section">
-        <TrainingCard
-          coverUrl="https://i.ytimg.com/vi/1x4y9bLH0hs/maxresdefault.jpg"
-          name="10 Tips Apex"
-        ></TrainingCard>
-        <TrainingCard
-          coverUrl="https://i.ytimg.com/vi/UEwTnirimf0/maxresdefault.jpg"
-          name="Tutorial Apex Legends"
-        ></TrainingCard>
-        <TrainingCard
-          coverUrl="https://i.blogs.es/af52a9/apexguia/1366_2000.jpg"
-          name="Aprendiendo Apex"
-        ></TrainingCard>
-        <TrainingCard
-          coverUrl="https://i.ytimg.com/vi/K51APSqxLAk/maxresdefault.jpg"
-          name="Guia Heroes Apex"
-        ></TrainingCard>
+        <div
+          v-for="trainingMaterial in trainingMaterials.slice(0, 4)"
+          :key="trainingMaterial.trainingMaterialId"
+        >
+          <TrainingCard @click="navigateToTrainingView(trainingMaterial.trainingMaterialId)"
+            :coverUrl="trainingMaterial.trainingCoverUri"
+            :name="trainingMaterial.title"
+            :description="trainingMaterial.trainingDescription"
+          ></TrainingCard>
+
+        </div>
       </div>
     </div>
   </section>
@@ -46,13 +35,64 @@
 <script>
 import GameLogo from "../components/GameLogoComponent.vue";
 import TrainingCard from "../components/TrainingCardComponent.vue";
+import helpiApiService from "../services/helpi-api-service";
 
 export default {
   name: "Game-Menu",
+
+  data() {
+    return {
+      game: {
+        name: "",
+        description: "",
+        coverUri: "",
+        id: 0,
+      },
+
+      errors: [],
+
+      trainingMaterials: [],
+
+      helpiApi: helpiApiService,
+    };
+  },
+
+  created() {
+    this.retrieveGame(this.$route.params.id);
+    this.retrieveTrainingMaterials(this.$route.params.id);
+  },
+
+  methods: {
+    retrieveGame(gameId) {
+      this.helpiApi
+        .getGame(gameId)
+        .then((response) => {
+          this.game = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+
+    retrieveTrainingMaterials(gameId) {
+      this.helpiApi
+        .getTrainingMaterialGameId(gameId)
+        .then((response) => {
+          this.trainingMaterials = response.data.content;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    navigateToTrainingView(trainingId) {
+      this.$router.push({ name: "training", params:{ id: this.$route.params.id, trainingId: trainingId} });
+    },
+  },
+
   components: {
     GameLogo,
     TrainingCard,
-  }
+  },
 };
 </script>
 
@@ -143,7 +183,7 @@ export default {
 .gamemenu-content-training-section {
   width: 100vw;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(290px, 400px));
   gap: 20px;
   padding: 20px;
 }

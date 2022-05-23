@@ -2,18 +2,21 @@
   <section class="gamemenu-section">
     <div class="gamemenu-content">
       <div class="gamemenu-info">
-        <h2>About 10 Tips Apex<br /></h2>
+        <h2>{{trainingMaterial.title}}<br /></h2>
         <p>Made by Expert Name</p>
         <p>Likes: 150</p>
         <div class="gamemenu-info-group">
           <a href="#" class="gamemenu-info-btn">Add to Library</a>
-          <a @click="navigateToGameMenuView" href="#" class="gamemenu-info-btn">Go to Game Menu</a>
+          <a @click="navigateToGameMenuView" href="#" class="gamemenu-info-btn"
+            >Go to Game Menu</a
+          >
         </div>
       </div>
       <div class="gamemenu-content-training-section">
         <TrainingCard
-          coverUrl="https://i.ytimg.com/vi/1x4y9bLH0hs/maxresdefault.jpg"
-          name="10 Tips Apex"
+          :coverUrl="trainingMaterial.trainingCoverUri"
+          :name="trainingMaterial.title"
+          :description="trainingMaterial.trainingDescription"
         ></TrainingCard>
       </div>
     </div>
@@ -22,14 +25,48 @@
 
 <script>
 import TrainingCard from "../components/TrainingCardComponent.vue";
+import helpiApiService from "../services/helpi-api-service";
 export default {
   name: "Training-Material",
+
+  data() {
+    return {
+      trainingMaterial: {
+        trainingMaterialId: 0,
+        title: "",
+        trainingDescription: "",
+        trainingCoverUri: "",
+      },
+
+      errors: [],
+
+      helpiApi: helpiApiService,
+    };
+  },
+
+  created() {
+    this.retrieveTrainingMaterial(this.$route.params.trainingId);
+  },
+
   components: {
     TrainingCard,
   },
   methods: {
     navigateToGameMenuView() {
-      this.$router.push({ name: "game" });
+      this.$router.push({
+        name: "game",
+        params: { id: this.$route.params.id },
+      });
+    },
+    retrieveTrainingMaterial(trainingId) {
+      this.helpiApi
+        .getTrainingMaterialById(trainingId)
+        .then((response) => {
+          this.trainingMaterial = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
   },
 };

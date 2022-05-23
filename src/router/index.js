@@ -30,12 +30,12 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: '/game',
+      path: '/game/:id',
       name: 'game',
       component: GameMenuView
     },
     {
-      path: '/training',
+      path: '/game/:id/training/:trainingId',
       name: 'training',
       component: TrainingView
     }

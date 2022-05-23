@@ -9,20 +9,17 @@
           cupiditate mollitia, dolorum doloribus incidunt officia voluptatum
           placeat corrupti exercitationem? Quibusdam, reprehenderit.
         </p>
-        <a @click="navigateToRegisterView" href="#" class="home-info-btn">Register Now</a>
+        <a @click="navigateToRegisterView" href="#" class="home-info-btn"
+          >Register Now</a
+        >
       </div>
-      <GameLogo
-        coverUrl="https://github.com/Complexity-Gaming/Help-I-Landing-Page/blob/main/img/Apex.png?raw=true"
-        name="Apex Legends"
-      ></GameLogo>
-      <GameLogo
-        coverUrl="https://github.com/Complexity-Gaming/Help-I-Landing-Page/blob/main/img/COD.png?raw=true"
-        name="Call Of Duty"
-      ></GameLogo>
-      <GameLogo
-        coverUrl="https://github.com/Complexity-Gaming/Help-I-Landing-Page/blob/main/img/DOta.png?raw=true"
-        name="Dota 2"
-      ></GameLogo>
+      <div v-for="game in games" :key="game.id">
+        <GameLogo
+          @click="navigateToGameMenuView(game.id)"
+          :coverUrl="game.coverUri"
+          :name="game.name"
+        ></GameLogo>
+      </div>
     </div>
     <div class="home-div-media-icons">
       <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
@@ -34,18 +31,45 @@
 
 <script>
 import GameLogo from "../components/GameLogoComponent.vue";
+import helpiApiService from "../services/helpi-api-service";
 
 export default {
   name: "Home",
+  data() {
+    return {
+      games: [],
+      errors: [],
+      helpiApi: helpiApiService,
+    };
+  },
   components: {
     GameLogo,
   },
-  methods:{
-    navigateToRegisterView(){
-      this.$router.push({name: "register"})
-    }
-  }
 
+  mounted() {
+    this.getGames();
+  },
+
+  methods: {
+    navigateToGameMenuView(gameId) {
+      this.$router.push({ name: "game", params: { id: gameId } });
+    },
+
+    navigateToRegisterView() {
+      this.$router.push({ name: "register" });
+    },
+
+    getGames() {
+      this.helpiApi
+        .getGamesApi()
+        .then((response) => {
+          this.games = response.data.content;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+  },
 };
 </script>
 
@@ -61,9 +85,9 @@ export default {
 
 .home-content {
   margin: 60px 100px;
-
   display: flex;
   justify-content: space-between;
+  gap: 20px;
   flex-wrap: wrap;
 }
 

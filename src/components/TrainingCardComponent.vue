@@ -1,5 +1,5 @@
 <template>
-  <div @click="navigateToTrainingView" class="gamemenu-content-training-cards">
+  <div class="gamemenu-content-training-cards">
     <div class="gamemenu-content-training-cards-img">
       <img
         :src="coverUrl"
@@ -8,10 +8,7 @@
     </div>
     <h1>{{name}}</h1>
     <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero dicta
-      culpa sapiente qui voluptates doloremque nulla quas adipisci quis! Ut
-      quibusdam consequatur excepturi enim numquam, assumenda laboriosam facere
-      placeat similique.
+      {{description}}
     </p>
   </div>
 </template>
@@ -19,12 +16,7 @@
 <script>
 export default {
   name: "TrainingCard",
-  props: ["coverUrl", "name"],
-    methods: {
-    navigateToTrainingView() {
-      this.$router.push({ name: "training" });
-    },
-  },
+  props: ["coverUrl", "name", "description"],
 };
 </script>
 
@@ -32,8 +24,8 @@ export default {
 .gamemenu-content-training-cards {
   position: relative;
   height: 400px;
+  max-width: 715px;
   cursor: pointer;
-
   box-shadow: -1px 10px 18px 5px rgba(0, 0, 0, 0.19);
   -webkit-box-shadow: -1px 10px 18px 5px rgba(0, 0, 0, 0.19);
   -moz-box-shadow: -1px 10px 18px 5px rgba(0, 0, 0, 0.19);
