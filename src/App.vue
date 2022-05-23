@@ -1,12 +1,8 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-</script>
-
 <template>
   <input type="checkbox" id="check" />
   <section class="home-section">
     <header class="home-header">
-      <h2><a href="#" class="home-logo">Helpi</a></h2>
+      <h2><a @click="navigateToHomeView" href="#" class="home-logo">Helpi</a></h2>
       <div class="home-navbar">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
@@ -21,6 +17,19 @@ import { RouterLink, RouterView } from "vue-router";
   </section>
   <RouterView />
 </template>
+
+<script>
+export default {
+  name: "App",
+  methods:{
+    navigateToHomeView(){
+      this.$router.push({name: "home"})
+    }
+  }
+
+};
+
+</script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
