@@ -4,13 +4,14 @@
       <h2 class="login-form-title">Register</h2>
       <p class="login-form-paragraph">
         Already have an Account?
-        <a @click="navigateToLoginView" href="#" class="login-form-link">Enter here</a>
+        <a @click="navigateToLoginView" href="#" class="login-form-link"
+          >Enter here</a
+        >
       </p>
       <div class="login-form-container">
-
         <div class="login-form-group">
           <input
-            v-model="userName"
+            v-model="player.name"
             type="text"
             id="user"
             class="login-form-input"
@@ -22,7 +23,7 @@
 
         <div class="login-form-group">
           <input
-            v-model="email"
+            v-model="player.email"
             type="email"
             id="email"
             class="login-form-input"
@@ -34,7 +35,7 @@
 
         <div class="login-form-group">
           <input
-            v-model="password"
+            v-model="player.password"
             type="password"
             id="password"
             class="login-form-input"
@@ -46,7 +47,7 @@
 
         <div class="login-form-group">
           <input
-            v-model="birthDate"
+            v-model="player.birthDate"
             type="date"
             id="birthdate"
             class="login-form-input"
@@ -63,22 +64,37 @@
 </template>
 
 <script>
+import Player from "../models/player";
+import helpiApiService from "../services/helpi-api-service";
+
 export default {
   name: "RegisterForm",
-  methods:{
-    register(){
-      var user = this.userName
-      var email = this.email
-      var password = this.password
-      var birthDate = this.birthDate
-
-      console.log(user, email, password, birthDate)
+  data() {
+    return {
+      player: new Player("", "", "", ""),
+      submitted: false,
+      successful: false,
+      message: "",
+      isValid: true,
+      helpiApi: helpiApiService,
+    };
+  },
+  methods: {
+    register() {
+      this.helpiApi.postPlayer(this.player).then((response) => {
+        if (response.data.status == 226){
+          window.alert("Email used");
+        }
+        else {
+          window.alert("Succesfully created");
+          this.navigateToLoginView()
+        }
+      });
     },
-    navigateToLoginView(){
-      this.$router.push({name: "login"})
-    }
-  }
-
+    navigateToLoginView() {
+      this.$router.push({ name: "login" });
+    },
+  },
 };
 </script>
 
@@ -140,7 +156,7 @@ export default {
 }
 
 .login-form-input:not(:placeholder-shown) {
-    color: #4d4646;
+  color: #4d4646;
 }
 
 .login-form-input:focus + .login-form-label,
@@ -172,28 +188,28 @@ export default {
   cursor: pointer;
 }
 
-.login-form-line{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #18932a;
-    transform: scale(0);
-    transform: left bottom;
-    transition: transform .4s;
+.login-form-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #18932a;
+  transform: scale(0);
+  transform: left bottom;
+  transition: transform 0.4s;
 }
 
 .login-form-input:focus ~ .login-form-line,
-.login-form-input:not(:placeholder-shown) ~ .login-form-line{
-    transform: scale(1);
+.login-form-input:not(:placeholder-shown) ~ .login-form-line {
+  transform: scale(1);
 }
 
 /* Media Query */
 
 @media only screen and (max-width: 960px) {
-    .login-form-title{
-        font-size: 1.8rem;
-    }
+  .login-form-title {
+    font-size: 1.8rem;
+  }
 }
 </style>
