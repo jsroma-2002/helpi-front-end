@@ -5,7 +5,7 @@ class HelpiApiService {
 
     constructor(){
         this.http = axios.create({
-            baseURL: `http://localhost:8080/api`,
+            baseURL: `https://helpi-api.herokuapp.com/api`,
             headers: {
                 'accept': 'application/json'
             }
@@ -21,7 +21,7 @@ class HelpiApiService {
     }
 
     getTrainingMaterialGameId(gameId){
-        return this.http.get(`/trainingMaterials/${gameId}/trainings`)
+        return this.http.get(`/trainingMaterials/game/${gameId}/trainings`)
     }
 
     getTrainingMaterialById(trainingId){
