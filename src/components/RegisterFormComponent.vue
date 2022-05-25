@@ -163,7 +163,7 @@ export default {
 .login-form-input:not(:placeholder-shown) + .login-form-label {
   transform: translateY(-12px) scale(0.7);
   transform-origin: left top;
-  color: #18932a;
+  color: #141F6A;
 }
 
 .login-form-label {
@@ -177,7 +177,7 @@ export default {
 }
 
 .login-form-submit {
-  background: #18932a;
+  background: #141F6A;
   color: #fff;
   font-family: "Poppins", sans-serif;
   font-weight: 300;

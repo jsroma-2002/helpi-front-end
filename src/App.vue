@@ -61,7 +61,7 @@ export default {
 
 .home-logo {
   position: relative;
-  color: #18932a;
+  color: #141F6A;
   font-size: 30px;
   text-decoration: none;
   text-transform: uppercase;
@@ -85,7 +85,7 @@ export default {
 }
 
 .home-navbar *:hover {
-  background: #18932a;
+  background: #141F6A;
   color: #fff;
 }
 
