@@ -28,6 +28,10 @@ class HelpiApiService {
         return this.http.get(`/trainingMaterials/${trainingId}`)
     }
 
+    getTrainingMaterialByPlayer(playerId){
+        return this.http.get(`/trainingMaterials/player/${playerId}`)
+    }
+
     postPlayer(player){
         return this.http.post(`/players`, {
             name: player.name,
@@ -35,6 +39,10 @@ class HelpiApiService {
             password: player.password,
             birthDate: player.birthDate
         })
+    }
+
+    getPlayerById(playerId){
+        return this.http.get(`/players/${playerId}`)
     }
     
 }

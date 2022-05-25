@@ -6,8 +6,10 @@
       <div class="home-navbar">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/register">Register</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
+        <RouterLink v-if="!userStore.isLogin" to="/register">Register</RouterLink>
+        <RouterLink v-if="!userStore.isLogin" to="/login">Login</RouterLink>
+        <RouterLink v-if="userStore.isLogin" to="/profile">Profile</RouterLink>
+        <RouterLink v-if="userStore.isLogin" @click.prevent="userStore.logout" to="/">Logout</RouterLink>
       </div>
       <label class="home-label" for="check">
         <i class="fas fa-bars menu-btn"></i>
@@ -18,6 +20,13 @@
   <RouterView />
 </template>
 
+<script setup>
+import { useUserStore } from '../src/stores/userStore'
+
+const userStore = useUserStore()
+
+</script>
+
 <script>
 export default {
   name: "App",
@@ -26,7 +35,6 @@ export default {
       this.$router.push({name: "home"})
     }
   }
-
 };
 
 </script>
