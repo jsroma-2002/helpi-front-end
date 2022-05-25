@@ -44,6 +44,10 @@ class HelpiApiService {
     getPlayerById(playerId){
         return this.http.get(`/players/${playerId}`)
     }
+
+    purchaseTrainingMaterial(playerId, trainingId){
+        return this.http.put(`/players/${playerId}/training/${trainingId}`)
+    }
     
 }
 
