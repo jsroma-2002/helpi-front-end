@@ -1,6 +1,6 @@
 <template>
   <section class="login-section">
-    <form @submit.prevent="login(userName)" class="login-form">
+    <form @submit.prevent="login(email, password)" class="login-form">
       <h2 class="login-form-title">Log in</h2>
       <p class="login-form-paragraph">
         Don't have an Account?
@@ -11,8 +11,8 @@
       <div class="login-form-container">
         <div class="login-form-group">
           <input
-            v-model="userName"
-            type="text"
+            v-model="email"
+            type="email"
             id="user"
             class="login-form-input"
             placeholder=" "
@@ -45,9 +45,9 @@ import router from "../router";
 
 const userStore = useUserStore();
 
-function login(userName) {
+function login(email, password) {
   helpiApi
-    .getPlayerById(userName)
+    .loginPlayer(email, password)
     .then((response) => {
       userStore.setPlayer(response.data)
       navigateToHomeView()

@@ -4,10 +4,8 @@
       <div class="home-info">
         <h2>Chosse your game <br /><span>Improve now!</span></h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore dicta,
-          eveniet in odio beatae dignissimos temporibus voluptatem modi,
-          cupiditate mollitia, dolorum doloribus incidunt officia voluptatum
-          placeat corrupti exercitationem? Quibusdam, reprehenderit.
+          Improve in your favorite games by using training material. Be a better player and then share 
+          your knowledge. Helpi is the best platform for competitive gaming training.
         </p>
         <a @click="navigateToRegisterView" href="#" class="home-info-btn"
           >Register Now</a

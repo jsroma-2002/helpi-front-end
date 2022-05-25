@@ -45,6 +45,13 @@ class HelpiApiService {
         return this.http.get(`/players/${playerId}`)
     }
 
+    loginPlayer(email, password){
+        return this.http.post(`/players/login`, {
+            email: email,
+            password: password,
+        })
+    }
+
     purchaseTrainingMaterial(playerId, trainingId){
         return this.http.put(`/players/${playerId}/training/${trainingId}`)
     }
