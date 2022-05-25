@@ -6,7 +6,7 @@
         <p>Made by Expert Name</p>
         <p>Likes: 150</p>
         <div class="gamemenu-info-group">
-          <a href="#" class="gamemenu-info-btn">Add to Library</a>
+          <a @click="addToLibrary" href="#" class="gamemenu-info-btn">Add to Library</a>
           <a @click="navigateToGameMenuView" href="#" class="gamemenu-info-btn"
             >Go to Game Menu</a
           >
@@ -26,6 +26,8 @@
 <script>
 import TrainingCard from "../components/TrainingCardComponent.vue";
 import helpiApiService from "../services/helpi-api-service";
+import { useUserStore } from "../stores/userStore";
+
 export default {
   name: "Training-Material",
 
@@ -57,6 +59,20 @@ export default {
         name: "game",
         params: { id: this.$route.params.id },
       });
+    },
+    navigateToProfile() {
+      this.$router.push({
+        name: "profile"
+      });
+    },
+    addToLibrary() {
+      if(useUserStore().isLogin){
+        this.helpiApi.purchaseTrainingMaterial(useUserStore().id, this.$route.params.trainingId)
+        this.navigateToProfile()
+      }
+      else{
+        window.alert("Para agregar a su biblioteca debe Iniciar Sesion");
+      }
     },
     retrieveTrainingMaterial(trainingId) {
       this.helpiApi

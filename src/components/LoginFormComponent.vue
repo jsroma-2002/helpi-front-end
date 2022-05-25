@@ -1,17 +1,18 @@
 <template>
   <section class="login-section">
-    <form @submit.prevent="login" class="login-form">
+    <form @submit.prevent="login(email, password)" class="login-form">
       <h2 class="login-form-title">Log in</h2>
       <p class="login-form-paragraph">
         Don't have an Account?
-        <a @click="navigateToRegisterView" href="#" class="login-form-link">Enter here</a>
+        <a @click="navigateToRegisterView" href="#" class="login-form-link"
+          >Enter here</a
+        >
       </p>
       <div class="login-form-container">
-
         <div class="login-form-group">
           <input
-            v-model="userName"
-            type="text"
+            v-model="email"
+            type="email"
             id="user"
             class="login-form-input"
             placeholder=" "
@@ -37,21 +38,49 @@
   </section>
 </template>
 
+<script setup>
+import { useUserStore } from "../stores/userStore";
+import helpiApi from "../services/helpi-api-service";
+import router from "../router";
+
+const userStore = useUserStore();
+
+function login(email, password) {
+  helpiApi
+    .loginPlayer(email, password)
+    .then((response) => {
+      userStore.setPlayer(response.data)
+      navigateToHomeView()
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+}
+
+function navigateToHomeView(){
+  router.push({ name: "home" });
+}
+
+</script>
+
 <script>
+import helpiApiService from "../services/helpi-api-service";
+
 export default {
   name: "LoginForm",
-  methods:{
-    login(){
-      var user = this.userName
-      var password = this.password
 
-      console.log(user, password)
+  data() {
+    return {
+      helpiApi: helpiApiService,
+    };
+  },
+
+  methods: {
+
+    navigateToRegisterView() {
+      this.$router.push({ name: "register" });
     },
-    navigateToRegisterView(){
-      this.$router.push({name: "register"})
-    }
-  }
-
+  },
 };
 </script>
 
@@ -113,14 +142,14 @@ export default {
 }
 
 .login-form-input:not(:placeholder-shown) {
-    color: #4d4646;
+  color: #4d4646;
 }
 
 .login-form-input:focus + .login-form-label,
 .login-form-input:not(:placeholder-shown) + .login-form-label {
   transform: translateY(-12px) scale(0.7);
   transform-origin: left top;
-  color: #141F6A;
+  color: #141f6a;
 }
 
 .login-form-label {
@@ -134,7 +163,7 @@ export default {
 }
 
 .login-form-submit {
-  background: #141F6A;
+  background: #141f6a;
   color: #fff;
   font-family: "Poppins", sans-serif;
   font-weight: 300;
@@ -145,28 +174,28 @@ export default {
   cursor: pointer;
 }
 
-.login-form-line{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #18932a;
-    transform: scale(0);
-    transform: left bottom;
-    transition: transform .4s;
+.login-form-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #18932a;
+  transform: scale(0);
+  transform: left bottom;
+  transition: transform 0.4s;
 }
 
 .login-form-input:focus ~ .login-form-line,
-.login-form-input:not(:placeholder-shown) ~ .login-form-line{
-    transform: scale(1);
+.login-form-input:not(:placeholder-shown) ~ .login-form-line {
+  transform: scale(1);
 }
 
 /* Media Query */
 
 @media only screen and (max-width: 960px) {
-    .login-form-title{
-        font-size: 1.8rem;
-    }
+  .login-form-title {
+    font-size: 1.8rem;
+  }
 }
 </style>
