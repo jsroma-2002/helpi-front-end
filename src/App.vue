@@ -61,7 +61,7 @@ export default {
 
 .home-logo {
   position: relative;
-  color: #141F6A;
+  color: #18932a;
   font-size: 30px;
   text-decoration: none;
   text-transform: uppercase;

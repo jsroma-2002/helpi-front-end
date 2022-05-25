@@ -149,7 +149,7 @@ export default {
 
 .gamemenu-info-btn {
   color: #fff;
-  background: #141F6A;
+  background: #18932a;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 700;
@@ -160,7 +160,7 @@ export default {
 }
 
 .gamemenu-info-btn:hover {
-  background: #2135bb;
+  background: #1ece38;
 }
 
 .gamemenu-training-cards-title {
