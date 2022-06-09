@@ -64,6 +64,13 @@ class HelpiApiService {
         return this.http.get(`/community/${communityId}`)
     }
     
+    joinCommunity(playerId, communityId){
+        return this.http.put(`/players/${playerId}/community/${communityId}`)
+    }
+
+    getCommunitiesByPlayerId(playerId){
+        return this.http.get(`/community/player/${playerId}`)
+    }
 }
 
 export default new HelpiApiService();

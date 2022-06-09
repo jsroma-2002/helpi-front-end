@@ -7,7 +7,7 @@
           {{ community.communityDescription }}
         </p>
         <div class="comunity-menu-info-group">
-          <a href="#" class="comunity-menu-info-btn">Join Community</a>
+          <a @click="joinCommunity" href="#" class="comunity-menu-info-btn">Join Community</a>
         </div>
       </div>
       <GameLogo coverUrl="https://cdn-icons-png.flaticon.com/512/5229/5229377.png" name="in progress"></GameLogo>
@@ -18,6 +18,7 @@
 <script>
 import helpiApiService from "../services/helpi-api-service";
 import GameLogo from "../components/GameLogoComponent.vue";
+import { useUserStore } from "../stores/userStore";
 
 export default {
   name: "Community-Menu",
@@ -37,7 +38,7 @@ export default {
   },
 
   created() {
-    this.retrieveComunity(this.$route.params.id);
+    this.retrieveComunity(this.$route.params.communityId);
   },
 
   methods: {
@@ -50,6 +51,17 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+    },
+    joinCommunity() {
+      if(useUserStore().isLogin){
+        this.helpiApi.joinCommunity(useUserStore().id, this.$route.params.communityId)
+        this.navigateToProfile()
+      }
+    },
+    navigateToProfile() {
+      this.$router.push({
+        name: "profile"
+      });
     },
 
   },

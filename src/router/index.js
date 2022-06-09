@@ -53,7 +53,7 @@ const router = createRouter({
       component: ComunitiesView,
     },
     {
-      path: "/communities/:id",
+      path: "/communities/:communityId",
       name: "community",
       component: CommunityView,
     },

@@ -21,6 +21,21 @@
       </div>
     </div>
   </div>
+  <h2 class="profile-training-cards-title">My Communities</h2>
+  <div class="profile-content-training">
+    <div class="profile-content-training-section">
+       <div
+          v-for="community in communities.slice(0, 4)"
+          :key="community.communityId"
+        >
+          <CommunityCard
+            @click="navigateToCommunityView(community.communityId)"
+            :name="community.communityTitle"
+            :description="community.communityDescription"
+          ></CommunityCard>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -30,6 +45,7 @@ const userStore = useUserStore();
 </script>
 
 <script>
+import CommunityCard from "../components/CommunityCardComponent.vue";
 import TrainingCard from "../components/TrainingCardComponent.vue";
 import helpiApiService from "../services/helpi-api-service";
 import { useUserStore } from "../stores/userStore";
@@ -43,15 +59,23 @@ export default {
 
       trainingMaterials: [],
 
+      communities: [],
+
       helpiApi: helpiApiService,
     };
   },
 
   created() {
     this.retrieveTrainingMaterials(useUserStore().id);
+    this.retrieveCommunities(useUserStore().id);
   },
 
   methods: {
+
+    navigateToCommunityView(communityId) {
+      this.$router.push({ name: "community", params: { id: communityId } });
+    },
+    
     retrieveTrainingMaterials(playerId) {
       this.helpiApi
         .getTrainingMaterialByPlayer(playerId)
@@ -62,10 +86,22 @@ export default {
           console.log(e);
         });
     },
+
+    retrieveCommunities(playerId) {
+      this.helpiApi
+        .getCommunitiesByPlayerId(playerId)
+        .then((response) => {
+          this.communities = response.data.content;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
   },
 
   components: {
     TrainingCard,
+    CommunityCard
   },
 };
 </script>

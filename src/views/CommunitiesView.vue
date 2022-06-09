@@ -41,7 +41,7 @@ export default {
 
   methods: {
     navigateToCommunityView(communityId) {
-      this.$router.push({ name: "community", params: { id: communityId } });
+      this.$router.push({ name: "community", params: { communityId: communityId } });
     },
 
     retrieveCommunities() {
