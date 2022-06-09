@@ -55,7 +55,22 @@ class HelpiApiService {
     purchaseTrainingMaterial(playerId, trainingId){
         return this.http.put(`/players/${playerId}/training/${trainingId}`)
     }
+
+    getCommunities(){
+        return this.http.get(`/community`)
+    }
+
+    getCommunity(communityId){
+        return this.http.get(`/community/${communityId}`)
+    }
     
+    joinCommunity(playerId, communityId){
+        return this.http.put(`/players/${playerId}/community/${communityId}`)
+    }
+
+    getCommunitiesByPlayerId(playerId){
+        return this.http.get(`/community/player/${playerId}`)
+    }
 }
 
 export default new HelpiApiService();

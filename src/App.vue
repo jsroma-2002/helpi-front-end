@@ -8,6 +8,7 @@
         <RouterLink to="/about">About</RouterLink>
         <RouterLink v-if="!userStore.isLogin" to="/register">Register</RouterLink>
         <RouterLink v-if="!userStore.isLogin" to="/login">Login</RouterLink>
+        <RouterLink v-if="userStore.isLogin" to="/communities">Communities</RouterLink>
         <RouterLink v-if="userStore.isLogin" to="/profile">Profile</RouterLink>
         <RouterLink v-if="userStore.isLogin" @click.prevent="userStore.logout" to="/">Logout</RouterLink>
       </div>
