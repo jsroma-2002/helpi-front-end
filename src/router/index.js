@@ -1,51 +1,63 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
-import LoginView from '../views/LoginView.vue'
-import RegisterView from '../views/RegisterView.vue'
-import GameMenuView from '../views/GameMenuView.vue'
-import TrainingView from '../views/TrainingMaterialView.vue'
-import ProfileView from '../views/ProfileView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../views/HomeView.vue";
+import AboutView from "../views/AboutView.vue";
+import LoginView from "../views/LoginView.vue";
+import RegisterView from "../views/RegisterView.vue";
+import GameMenuView from "../views/GameMenuView.vue";
+import TrainingView from "../views/TrainingMaterialView.vue";
+import ProfileView from "../views/ProfileView.vue";
+import ComunitiesView from "../views/CommunitiesView.vue";
+import CommunityView from "../views/CommunityView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
+      path: "/",
+      name: "home",
+      component: HomeView,
     },
     {
-      path: '/about',
-      name: 'about',
-      component: AboutView
+      path: "/about",
+      name: "about",
+      component: AboutView,
     },
     {
-      path: '/register',
-      name: 'register',
-      component: RegisterView
+      path: "/register",
+      name: "register",
+      component: RegisterView,
     },
     {
-      path: '/login',
-      name: 'login',
-      component: LoginView
+      path: "/login",
+      name: "login",
+      component: LoginView,
     },
     {
-      path: '/game/:id',
-      name: 'game',
-      component: GameMenuView
+      path: "/game/:id",
+      name: "game",
+      component: GameMenuView,
     },
     {
-      path: '/game/:id/training/:trainingId',
-      name: 'training',
-      component: TrainingView
+      path: "/game/:id/training/:trainingId",
+      name: "training",
+      component: TrainingView,
     },
     {
-      path: '/profile',
-      name: 'profile',
-      component: ProfileView
-    }
-  ]
-})
+      path: "/profile",
+      name: "profile",
+      component: ProfileView,
+    },
+    {
+      path: "/communities",
+      name: "communities",
+      component: ComunitiesView,
+    },
+    {
+      path: "/communities/:id",
+      name: "community",
+      component: CommunityView,
+    },
+  ],
+});
 
-export default router
+export default router;
