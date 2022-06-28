@@ -10,14 +10,14 @@
           <a @click="joinCommunity" href="#" class="comunity-menu-info-btn">Join Community</a>
         </div>
       </div>
-      <GameLogo coverUrl="https://cdn-icons-png.flaticon.com/512/5229/5229377.png" name="in progress"></GameLogo>
+      <CommunityLogo :coverUrl="community.communityCover" :name="community.communityTitle"></CommunityLogo>
     </div>
   </section>
 </template>
 
 <script>
 import helpiApiService from "../services/helpi-api-service";
-import GameLogo from "../components/GameLogoComponent.vue";
+import CommunityLogo from "../components/CommunityLogoComponent.vue";
 import { useUserStore } from "../stores/userStore";
 
 export default {
@@ -28,6 +28,7 @@ export default {
       community: {
         communityTitle: "",
         communityDescription: "",
+        communityCover: "",
         communityId: 0,
       },
 
@@ -67,7 +68,7 @@ export default {
   },
 
   components: {
-    GameLogo
+    CommunityLogo
   }
 };
 </script>

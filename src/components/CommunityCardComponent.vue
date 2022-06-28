@@ -2,7 +2,7 @@
   <div class="gamemenu-content-community-cards">
     <div class="gamemenu-content-community-cards-img">
       <img
-        src="https://cdn2.vectorstock.com/i/1000x1000/61/81/in-progress-vector-16686181.jpg"
+        :src="cover"
         :alt="name"
       />
     </div>
@@ -16,7 +16,7 @@
 <script>
 export default {
   name: "CommunityCard",
-  props: ["name", "description"],
+  props: ["name", "description","cover"],
 };
 </script>
 
