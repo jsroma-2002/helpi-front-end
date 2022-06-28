@@ -11,6 +11,7 @@
             @click="navigateToCommunityView(community.communityId)"
             :name="community.communityTitle"
             :description="community.communityDescription"
+            :cover="community.communityCover"
           ></CommunityCard>
         </div>
       </div>
